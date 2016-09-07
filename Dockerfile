@@ -18,7 +18,7 @@ RUN pip install elasticsearch-curator==4.0.6
 WORKDIR /opt
 
 COPY ./docker-entrypoint.sh /opt/
-COPY config /opt/config
+COPY ./config /opt/config
 
 ENV INTERVAL_IN_HOURS=24
 

@@ -1,13 +1,14 @@
-# docker-elasticsearch-curator
+# docker-elasticsearch-curator4
 
-This only job executed by the docker built from this repository is to clean the elastic search logstash history leaving only a configurable amount of days worth of logging in the system. The job runs in the specified interval.
+This Dockerfile is based on [visity/docker-elasticsearch-curator](https://github.com/visity/docker-elasticsearch-curator). It has been updated to work with Curator 4, which allows you to configure Curator with two config files:
 
-It can be run as follows:
+1. `config/curator.yml`: the [Curator config file](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/configfile.html) in which the base configuration of Curator is stored
+2. `config/actionfile.yml`: the [Curator action file](https://www.elastic.co/guide/en/elasticsearch/client/curator/current/actionfile.html) in which all all index-filters and actions are defined
 
-	docker run -d -e INTERVAL_IN_HOURS=24 -e OLDER_THAN_IN_DAYS="10" --link es1:elasticsearch visity/elasticsearch-curator
-	
-where **es1** is the name of the elasticsearch container and
+When you have created your config files, you can run the container as follows:
 
-* **INTERVAL\_IN\_HOURS**: The amount of time between two curator runs
-* **OLDER\_THAN\_IN\_DAYS**: Indicates all logs with a date exceeding this age can be deleted.
+	docker run -d -e INTERVAL_IN_HOURS=24 -v /your/local/config_dir:/opt/config --link es1:elasticsearch <image_name>
 
+This will run the specified actions in every X hours, where X is the value you've given to `INTERVAL_IN_HOURS`.
+
+The link value **es1** is the name of the elasticsearch container.

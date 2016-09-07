@@ -19,10 +19,11 @@ WORKDIR /opt
 
 # Copy the script used to launch the Elastalert when a container is started.
 COPY ./docker-entrypoint.sh /opt/
-COPY ./actionfile.yml /home/curator/
-COPY ./.curator/curator.yml /home/curator/.curator/curator.yml
+COPY ./config/* /home/curator/config/
 
 ENV INTERVAL_IN_HOURS=24
+
+VOLUME ["/home/curator/config/"]
 
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 

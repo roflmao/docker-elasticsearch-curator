@@ -11,7 +11,7 @@ fi
 if [ "$1" = 'curator' ]; then
   # Wait 10 seconds for all other services to start before starting run this script
   sleep 10
-	exec gosu curator bash -c "while true; do curator ./config/actionfile.yml; set -e; sleep $(( 60*60*INTERVAL_IN_HOURS )); set +e; done"
+  exec gosu curator bash -c "while true; do curator --config /opt/config/curator.yml /opt/config/actionfile.yml; set -e; sleep $(( 60*60*INTERVAL_IN_HOURS )); set +e; done"
 fi
 
 # As argument is not related to curator,

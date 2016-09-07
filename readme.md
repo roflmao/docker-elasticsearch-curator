@@ -7,7 +7,7 @@ This Dockerfile is based on [visity/docker-elasticsearch-curator](https://github
 
 When you have created your config files, you can run the container as follows:
 
-	docker run -d -e INTERVAL_IN_HOURS=24 -v /your/local/config_dir:/opt/config --link es1:elasticsearch <image_name>
+	docker run -d -e INTERVAL_IN_HOURS=24 -v /your/local/config_dir:/opt/config --link es1:elasticsearch plindelauf/curator4
 
 This will run the specified actions in every X hours, where X is the value you've given to `INTERVAL_IN_HOURS`.
 

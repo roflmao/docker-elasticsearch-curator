@@ -17,13 +17,12 @@ RUN pip install elasticsearch-curator==4.0.6
 
 WORKDIR /opt
 
-# Copy the script used to launch the Elastalert when a container is started.
 COPY ./docker-entrypoint.sh /opt/
-COPY ./config/* /home/curator/config/
+COPY config /opt/config
 
 ENV INTERVAL_IN_HOURS=24
 
-VOLUME ["/home/curator/config/"]
+VOLUME ["/opt/config/"]
 
 ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 

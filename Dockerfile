@@ -15,10 +15,15 @@ RUN groupadd -r curator && useradd -r -g curator curator
 
 RUN pip install elasticsearch-curator==4.0.6
 
-COPY docker-entrypoint.sh /
+WORKDIR /opt
+
+# Copy the script used to launch the Elastalert when a container is started.
+COPY ./docker-entrypoint.sh /opt/
+COPY ./actionfile.yml /opt/
+COPY ./.curator/curator.yml /opt/.curator/curator.yml
 
 ENV INTERVAL_IN_HOURS=24
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/opt/docker-entrypoint.sh"]
 
 CMD ["curator"] 

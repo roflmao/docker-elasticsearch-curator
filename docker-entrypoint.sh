@@ -9,6 +9,8 @@ fi
 
 # Step down via gosu  
 if [ "$1" = 'curator' ]; then
+  # Wait 20 seconds for all other services to start before starting run this script
+  sleep 20
 	exec gosu curator bash -c "while true; do curator actionfile.yml; set -e; sleep $(( 60*60*INTERVAL_IN_HOURS )); set +e; done"
 fi
 
